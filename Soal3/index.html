@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balanced Bracket Checker</title>
+</head>
+<body>
+    <h2>Input your bracket sequence:</h2>
+    <input type="text" id="bracketInput">
+    <button onclick="checkBalancedBracket()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function isBalancedBrackets(s) {
+            let stack = [];
+            let openBrackets = { '(': ')', '[': ']', '{': '}' };
+
+            for (let char of s) {
+                if (char in openBrackets) {
+                    stack.push(char);
+                } else {
+                    let lastBracket = stack.pop();
+                    if (char !== openBrackets[lastBracket]) {
+                        return "NO";
+                    }
+                }
+            }
+
+            return stack.length === 0 ? "YES" : "NO";
+        }
+
+        function checkBalancedBracket() {
+            const input = document.getElementById("bracketInput").value;
+            const result = isBalancedBrackets(input);
+            document.getElementById("result").innerText = `Output: ${result}`;
+        }
+    </script>
+</body>
+</html>
